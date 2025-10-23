@@ -1,16 +1,11 @@
-***Unless specified otherwise in the AIIP_exceptions folder of this repository, this project follows the guidelines outlined in the AI-Internship-Program repository.***
 
----
-# 🌟 Project-name
+# Strategist-modular
 
+## Repo Description
 
-
-
-
+This repo contains the modular version of Strategist.
 
 ---
 
-## 🚀 Get Started
-👉 Check [docs/onboarding.md](docs/onboarding.md) and claim your first issue here: [GitHub Issues](../../issues)
-
-Happy Hacking! 💻✨
+## Getting Started
+Check [docs/README.md](docs/README.md) to learn more about the source code, and [CONTRIBUTING.md](https://github.com/intelligenxe/.github/blob/main/CONTRIBUTING.md) to start contributing.
