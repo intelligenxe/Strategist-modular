@@ -37,45 +37,45 @@ Your Use Case:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                                                               │
-│  Part 1: Knowledge Base (LlamaIndex)                         │
-│  ┌──────────┐    ┌──────────┐    ┌──────────────┐          │
-│  │ Documents│ -> │ Chunking │ -> │ Vector Index │          │
-│  └──────────┘    └──────────┘    └──────────────┘          │
-│                                           │                   │
-└───────────────────────────────────────────┼──────────────────┘
+│                                                             │
+│  Part 1: Knowledge Base (LlamaIndex)                        │
+│  ┌──────────┐    ┌──────────┐    ┌──────────────┐           │
+│  │ Documents│ -> │ Chunking │ -> │ Vector Index │           │
+│  └──────────┘    └──────────┘    └──────────────┘           │
+│                                           │                 │
+└───────────────────────────────────────────┼─────────────────┘
                                             │
                                             │ Query Engine
                                             │
-                        ┌───────────────────▼─────────────┐
+                        ┌───────────────────▼────────────-─┐
                         │                                  │
                         │  RAG Tools (Bridge Layer)        │
                         │  - search_knowledge_base()       │
                         │  - extract_statistics()          │
                         │  - compare_topics()              │
                         │                                  │
-                        └───────────────────┬─────────────┘
+                        └───────────────────┬────────────-─┘
                                             │
 ┌───────────────────────────────────────────┼──────────────────┐
-│                                           │                   │
-│  Part 2: CrewAI Agents                    │                   │
-│  ┌──────────┐    ┌──────────┐    ┌──────▼─────┐            │
-│  │Researcher│ -> │ Analyst  │ -> │   Writer   │            │
-│  └──────────┘    └──────────┘    └────────────┘            │
+│                                           │                  │
+│  Part 2: CrewAI Agents                    │                  │
+│  ┌──────────┐    ┌──────────┐    ┌──────▼─────┐              │
+│  │Researcher│ -> │ Analyst  │ -> │   Writer   │              │
+│  └──────────┘    └──────────┘    └────────────┘              │
 │       │               │                 │                    │
-└───────┼───────────────┼─────────────────┼───────────────────┘
+└───────┼───────────────┼─────────────────┼───────────────────-┘
         │               │                 │
         └───────────────┴─────────────────┘
                         │
-┌───────────────────────▼─────────────────────────────────────┐
-│                                                               │
+┌───────────────────────▼────────────────────────────────────-─┐
+│                                                              │
 │  Part 3: Workflow Orchestrator                               │
 │  - setup_knowledge_base()                                    │
 │  - setup_crew()                                              │
 │  - run_analysis()                                            │
 │  - save_reports()                                            │
-│                                                               │
-└─────────────────────────────────────────────────────────────┘
+│                                                              │
+└───────────────────────────────────────────────────────────-──┘
 ```
 
 ---
@@ -1190,89 +1190,6 @@ from rag_analysis import Config
 config = Config.from_env()
 config.llm.temperature = 0.5
 ```
-
----
-
-## Glossary
-
-### Core Concepts
-
-**RAG (Retrieval-Augmented Generation)**
-- Combine document retrieval with LLM generation
-- Search knowledge base first, then generate response using retrieved context
-- More accurate and grounded than pure generation
-
-**Vector Index**
-- Database of document embeddings
-- Enables semantic search (similarity-based)
-- Much better than keyword matching
-
-**Embedding**
-- Vector representation of text meaning
-- Captures semantic relationships
-- Documents with similar meaning have similar embeddings
-
-**Chunking**
-- Breaking documents into smaller pieces
-- Improves search precision
-- Affects quality and performance
-
-**Query Engine**
-- Interface to search vector index
-- Takes query, finds similar documents
-- Returns most relevant passages
-
-**Agent**
-- AI entity with role, goal, and tools
-- Can search knowledge base
-- Can collaborate with other agents
-
-**Crew**
-- Group of agents working together
-- Execute tasks in sequence
-- Share context and collaborate
-
-**Tool**
-- Function agents can call
-- `search_knowledge_base()` is a RAG tool
-- Agents use tools to accomplish tasks
-
-**Task**
-- Work unit assigned to agent
-- Describes what to do
-- Can depend on other tasks
-
-**Workflow**
-- End-to-end process
-- Orchestrates KB + Agents + Tasks
-- Saves results
-
-### Technology Stack
-
-**LlamaIndex**
-- Document indexing and retrieval framework
-- Specializes in RAG
-- Handles complex document parsing
-
-**CrewAI**
-- Multi-agent framework
-- Handles task orchestration
-- Built on LangChain
-
-**LangChain**
-- LLM framework
-- Provides chat/completion interfaces
-- Powers both LlamaIndex and CrewAI
-
-**Groq**
-- Fast LLM inference provider
-- Specialized hardware (LPU)
-- 100x faster than alternatives
-
-**FAISS**
-- Vector search library by Meta
-- In-memory vector store
-- Perfect for local development
 
 ---
 
